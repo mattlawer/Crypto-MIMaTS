@@ -4,7 +4,6 @@
 
 int main (void)
 {
-	//Create a raw socket
     mpz_t a,g,p,b,   A,Kb,Ka,B;
     
     mpz_init(a);
