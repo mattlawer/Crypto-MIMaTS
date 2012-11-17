@@ -11,7 +11,7 @@ CFLAGS = -g -Wall -O3
 all : dh clean
 
 dh : $(OBJ)
-	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJ) -o dh
+	$(CC) $(OBJ) $(CFLAGS) $(LDFLAGS) -o dh
 
 dh.o : dh.c
 	$(CC) $(CFLAGS) -c dh.c
