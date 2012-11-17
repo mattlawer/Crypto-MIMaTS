@@ -5,12 +5,12 @@ GMPLIB    = -lgmp
 GMPLPATH  = -L/usr/local/lib
 
 LDFLAGS = $(GMPIPATH) $(GMPLIB) $(GMPLPATH)
-CFLAGS = -g -Wall -O3
+CFLAGS = -g -Wall -O3 -lm
 
 all : rsa clean
 
 rsa : rsa.o numlib.o
-	$(CC) $(CFLAGS) $(LDFLAGS) rsa.o numlib.o -o rsa
+	$(CC) rsa.o numlib.o $(CFLAGS) $(LDFLAGS) -o rsa
 
 rsa.o : rsa.c
 	$(CC) $(CFLAGS) -c rsa.c
