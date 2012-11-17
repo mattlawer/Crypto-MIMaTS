@@ -5,7 +5,14 @@
 #include <gmp.h>
 #include "numlib.h"
 
-#define size_alphabet 1000
+static const char alphabet[] = {'*','a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+    'u', 'v', 'w', 'x', 'y', 'z', ' ', ',', '.', '?', ':'};
+
+static int size_alphabet = (int)sizeof(alphabet);
+
+#define max( a, b ) ( ((a) > (b)) ? (a) : (b) )
+#define indexof(X) max(strchr(alphabet,X)-alphabet, 0)
 
 mpz_t* message_to_blocks(char *msg, int blocksize);
 void pow_blocks(mpz_t* blocks, int n_blocks, mpz_t pow, mpz_t mod);
@@ -22,13 +29,15 @@ int main (int argc, char *argv[], char *arge[])
     mpz_init(e);
     mpz_init(d);
     mpz_init(phiN);
+    
+    //printf("index a : %d\nc: %d\n",indexof('a'),indexof('A'));
 
     printf("\nAlice choisit 2 nombres premiers p et q.\n");
     
-    printf("Saisir p : ");
+    printf("Saisir p [ex 45013] : ");
     gmp_scanf("%Zd",&p);
     
-    printf("Saisir q : ");
+    printf("Saisir q [ex 39191] : ");
     gmp_scanf("%Zd",&q);
     
     mpz_mul(N, p, q); // N=p*q;
@@ -41,7 +50,7 @@ int main (int argc, char *argv[], char *arge[])
     
     gmp_printf("N: %Zd\n\np-1: %Zd\nq-1: %Zd\nphiN: %Zd\n\n",N,p,q,phiN);
     
-    printf("Saisir e premier avec phiN : ");
+    printf("Saisir e premier avec phiN [ex 214231]: ");
     gmp_scanf("%Zd",&e);
     while (!premiers(phiN, e)) {
         gmp_printf("%Zd n'est pas premier avec %Zd\n",e,phiN);
@@ -59,10 +68,11 @@ int main (int argc, char *argv[], char *arge[])
     scanf(" %[^\n]s",msg);
     
     int i;
+    int taille_block = 2;
     int len = strlen(msg);
-    int blocks_cnt = ceil((float)len/3.0);
+    int blocks_cnt = ceil((float)len/taille_block);
     
-    blocks = message_to_blocks(msg, 1);
+    blocks = message_to_blocks(msg, taille_block);
     printf("Blocks :\n");
     
     for (i=0; i<blocks_cnt; i++) {
@@ -70,6 +80,7 @@ int main (int argc, char *argv[], char *arge[])
     }
     printf("\b\b\n\n");
     
+    // Chiffrement avec e
     pow_blocks(blocks, blocks_cnt, e, N);
     printf("Secret Blocks :\n");
     
@@ -78,6 +89,8 @@ int main (int argc, char *argv[], char *arge[])
     }
     printf("\b\b\n\n");
     
+    
+    // Déchiffrement avec d
     pow_blocks(blocks, blocks_cnt, d, N);
     printf("Décript Blocks :\n");
     
@@ -123,7 +136,7 @@ mpz_t* message_to_blocks(char *msg, int blocksize) {
             }
             index = (blocksize*i)+j;
             if (index<len) {
-                mpz_mul_ui(tmp, offset, (unsigned long int)msg[index]);
+                mpz_mul_ui(tmp, offset, indexof(msg[index]));
                 mpz_add(tableau[i], tableau[i], tmp);
             }
         }
