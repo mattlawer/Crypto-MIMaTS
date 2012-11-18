@@ -5,7 +5,9 @@ Réalisés dans le cadre du M1 [MIMaTS][] au sein de l'[UFR de Tours][].
 
 Utilisation d'un alphabet codé sous forme de nombres :
 
-		A=0, B=1, C=2, ... , Z=25
+| A | B | C | D | E | F | G | H | I | J | K  | L  | M  | ... | Z  |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:--:|:--:|:--:|:---:|:--:|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | ... | 25 |
 
 
 Cryptosystème césar
