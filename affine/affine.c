@@ -9,6 +9,7 @@ static const char alphabet[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'
 static int mod = sizeof(alphabet);
 
 void affine(char *str, int a, int b);
+int pgcd(int a, int b);
 
 int main (int argc, char *argv[], char *arge[]) {
     char message[512];
@@ -16,10 +17,14 @@ int main (int argc, char *argv[], char *arge[]) {
     
     printf("Chiffrement affine de la forme y = Ax + B\n"
            "résolution dans Z/%dZ\n\n",mod);
-    do {
+    
+    printf("Saisir le coefficient A (inversible dans Z/%dZ) : ",mod);
+    scanf("%d",&a);
+    while (pgcd(mod, a) != 1) { // inversibles
+        printf("\e[1m\e[38;5;9m%d n'est pas inversible dans Z/%dZ !\n\e[m",a,mod);
         printf("Saisir le coefficient A (inversible dans Z/%dZ) : ",mod);
         scanf("%d",&a);
-    } while (a == 0); //tout inversible sauf 0 dans Z/pZ avec p premier
+    }
     
     if (a>mod) {
         printf(" = %d soit %d dans Z/%dZ\n",a,a%mod,mod);
@@ -85,4 +90,19 @@ void affine(char *str, int a, int b) {
             str++;
         }
     }
+}
+
+int pgcd(int a, int b) {
+    int r = 0;
+    if (a<b) { // On échange a et b
+        r = a; a = b; b = r; r = 0;
+    }
+    do {
+        r = a%b;        
+        if (r != 0) {
+            a = b;
+            b = r;
+        }
+    } while (r != 0);
+    return b;
 }

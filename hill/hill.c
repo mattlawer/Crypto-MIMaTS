@@ -36,6 +36,8 @@ int main (int argc, char *argv[], char *arge[]) {
     
     char message[512];
     
+    printf("Chiffrement de hill\n\n");
+    
     // Saisie matrice
     do {
         printf("Entrez les %d chiffres de la matrice inversible : ",BLOC*BLOC);

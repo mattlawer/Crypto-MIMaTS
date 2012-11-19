@@ -93,7 +93,7 @@ Chiffrement en aX+b.
     Dans notre cas a<sub>d</sub> = 9 et b<sub>d</sub> = 23</br>
 
 2. On utilise la fonction 9x+23 pour déchiffrer :
-    
+
         A -> 9*A+23 = X      "MZWKZRI" -> "BONJOUR"
         B -> 9*B+23 = G
         ...
