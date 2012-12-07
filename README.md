@@ -46,7 +46,7 @@ On rentre chaque nouvelle lettre du vers dans la table de permutation puis on co
 Pour le déchiffrement on passe de l'alphabet permuté aux antécédents des permutations. 
 
 
-Cryptosystème de Viegenère
+Cryptosystème de Vigenère
 -----
 Chiffrement utilisant une clé pour décaler les lettres du message
 

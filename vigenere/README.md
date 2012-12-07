@@ -1,4 +1,4 @@
-Cryptosystème de Viegenère
+Cryptosystème de Vigenère
 -----
 Chiffrement utilisant une clé pour décaler les lettres du message
 
