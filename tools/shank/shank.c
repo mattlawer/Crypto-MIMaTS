@@ -49,13 +49,14 @@ int shank(int base, int reste, int field) {
     int j,i, g,s, t;
     int m = ceil(sqrt(field-1));
     
+    // décomposition en puissances de nombres premiers
     point *L = malloc(m*sizeof(point));
     for (j=0; j<m; j++) {
         L[j].x = j;
         L[j].y = exp_mod(base, j, field);
     }
     
-    // Tri du tableau L
+	// Tri du tableau L
 	point tmp;
 	for(i=0; i<m; i++) {
 		s=i;
